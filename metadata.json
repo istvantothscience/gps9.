@@ -1,0 +1,6 @@
+{
+  "name": "Műhold-küldetés: Tájékozódás égen-földön",
+  "description": "Interaktív tanórai webalkalmazás a 'Tájékozódás égen-földön' fizika témakörhöz: GPS-trilaterációs szimuláció, Google Earth és Google Sky terepmissziók, tanári vezérlőpult és valós idejű pontkövetés.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
