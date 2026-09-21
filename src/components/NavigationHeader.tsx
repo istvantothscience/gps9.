@@ -1,9 +1,11 @@
 import React from 'react';
-import { Satellite, Users, Monitor, ExternalLink, Activity } from 'lucide-react';
+import { Satellite, Compass, Gamepad2, Monitor, ExternalLink } from 'lucide-react';
+
+export type MainViewType = 'ppt' | 'jatek' | 'tanar';
 
 interface NavigationHeaderProps {
-  currentView: 'tanar' | 'diak' | 'home';
-  onSelectView: (view: 'tanar' | 'diak' | 'home') => void;
+  currentView: MainViewType;
+  onSelectView: (view: MainViewType) => void;
   sessionCode?: string;
   isSocketConnected?: boolean;
 }
@@ -19,7 +21,7 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({
       <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-3">
         {/* Brand */}
         <div
-          onClick={() => onSelectView('home')}
+          onClick={() => onSelectView('ppt')}
           className="flex items-center gap-2.5 cursor-pointer select-none group"
         >
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-500 flex items-center justify-center text-white shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform">
@@ -40,34 +42,49 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({
           </div>
         </div>
 
-        {/* View Switcher Controls */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900 border border-slate-800">
+        {/* Primary View Switcher: PPT vs. Játékok */}
+        <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-900 border border-slate-800">
           <button
             type="button"
-            id="nav-btn-tanar"
-            onClick={() => onSelectView('tanar')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-              currentView === 'tanar'
+            id="nav-btn-ppt"
+            onClick={() => onSelectView('ppt')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              currentView === 'ppt'
                 ? 'bg-cyan-500 text-slate-950 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <Monitor className="w-3.5 h-3.5" />
-            <span>Tanári nézet (/tanar)</span>
+            <Compass className="w-3.5 h-3.5" />
+            <span>Prezentáció (PPT)</span>
           </button>
 
           <button
             type="button"
-            id="nav-btn-diak"
-            onClick={() => onSelectView('diak')}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-              currentView === 'diak'
+            id="nav-btn-jatek"
+            onClick={() => onSelectView('jatek')}
+            className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              currentView === 'jatek'
                 ? 'bg-cyan-500 text-slate-950 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
-            <Users className="w-3.5 h-3.5" />
-            <span>Diák nézet (/diak)</span>
+            <Gamepad2 className="w-3.5 h-3.5" />
+            <span>Játékok & Feladatok</span>
+          </button>
+
+          <button
+            type="button"
+            id="nav-btn-tanar"
+            onClick={() => onSelectView('tanar')}
+            className={`px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1 cursor-pointer ${
+              currentView === 'tanar'
+                ? 'bg-slate-800 text-cyan-300 font-bold'
+                : 'text-slate-500 hover:text-slate-300'
+            }`}
+            title="Tanári Kivetítő és Vezérlőpult"
+          >
+            <Monitor className="w-3 h-3" />
+            <span className="hidden sm:inline">Tanári pult</span>
           </button>
         </div>
 
